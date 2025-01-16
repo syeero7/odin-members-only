@@ -4,9 +4,11 @@ import { Strategy as LocalStrategy } from "passport-local";
 import { getUserByEmail, getUserById } from "../db/queries.js";
 
 const strategy = new LocalStrategy(
-  { usernameField: "email", passwordField: "password" },
-  async (email, password, done) => {
+  { usernameField: "email", passReqToCallback: true },
+  async (req, email, password, done) => {
     try {
+      req.session.messages = [];
+
       const user = await getUserByEmail(email);
       if (!user) return done(null, false, { message: "Incorrect email" });
 

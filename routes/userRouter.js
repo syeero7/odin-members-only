@@ -16,6 +16,7 @@ userRouter.post(
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/user/sign-in",
+    failureMessage: true,
   })
 );
 

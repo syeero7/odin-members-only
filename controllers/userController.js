@@ -24,7 +24,10 @@ export const signupUserPost = [
   },
 ];
 
-export const signinUserGet = (req, res) => res.render("sign-in");
+export const signinUserGet = (req, res) => {
+  const errors = req.session.messages?.map((msg) => ({ msg })) || [];
+  res.render("sign-in", { errors });
+};
 
 export const logoutUserGet = (req, res, next) => {
   req.logout((err) => {
