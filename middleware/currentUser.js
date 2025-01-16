@@ -1,7 +1,7 @@
 import { getMemberByUserId } from "../db/queries.js";
 
 const currentUser = async (req, res, next) => {
-  if (req.user) {
+  if (req.isAuthenticated()) {
     const member = await getMemberByUserId(req.user.id);
     const isMember = member?.user_id > 0;
     const isAdmin = member?.admin || false;
