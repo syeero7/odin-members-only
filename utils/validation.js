@@ -40,3 +40,16 @@ export const validateUser = [
     .custom((value, { req }) => value === req.body.password)
     .withMessage(passwordErr),
 ];
+
+export const validatePost = [
+  body("title")
+    .trim()
+    .isAlpha("en-US", { ignore: /\s/ })
+    .withMessage(`Title ${alphaErr}`)
+    .isLength({ min: 3, max: 20 })
+    .withMessage(`Title ${lengthErr(20, 3)}`),
+  body("message")
+    .trim()
+    .isLength({ min: 10, max: 200 })
+    .withMessage(`Message ${lengthErr(200, 10)}`),
+];
