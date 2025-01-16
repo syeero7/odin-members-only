@@ -9,6 +9,7 @@ import { pool } from "./config/database.js";
 import { initializePassport } from "./config/passport.js";
 import currentUser from "./middleware/currentUser.js";
 import userRouter from "./routes/userRouter.js";
+import indexRouter from "./routes/indexRouter.js";
 
 const app = express();
 
@@ -34,7 +35,8 @@ app.use(passport.session());
 
 app.use(currentUser);
 
-app.use("/", userRouter);
+app.use("/", indexRouter);
+app.use("/user", userRouter);
 
 const PORT = process.env.PORT;
 
