@@ -29,7 +29,7 @@ export const signinUserGet = (req, res) => {
   res.render("sign-in", { errors });
 };
 
-export const logoutUserGet = (req, res, next) => {
+export const logoutUserPost = (req, res, next) => {
   req.logout((err) => {
     if (err) return next(err);
     res.redirect("/");
