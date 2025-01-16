@@ -19,7 +19,7 @@ userRouter.post(
 );
 userRouter.post("/logout", controller.logoutUserPost);
 
-userRouter.post("/:userId/membership", controller.setMembership);
-userRouter.post("/:userId/admin", controller.setAdmin);
+userRouter.post("/:userId/membership", controller.setMembershipPost);
+userRouter.post("/:userId/admin", controller.setAdminPost);
 
 export default userRouter;

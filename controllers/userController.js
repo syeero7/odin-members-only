@@ -36,7 +36,7 @@ export const logoutUserPost = (req, res, next) => {
   });
 };
 
-export const setMembership = async (req, res) => {
+export const setMembershipPost = async (req, res) => {
   const { userId } = req.params;
   const { passcode } = req.body;
 
@@ -46,7 +46,7 @@ export const setMembership = async (req, res) => {
   return res.redirect("/");
 };
 
-export const setAdmin = async (req, res) => {
+export const setAdminPost = async (req, res) => {
   const { userId } = req.params;
   const { passcode } = req.body;
 
