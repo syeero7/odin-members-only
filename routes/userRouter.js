@@ -20,4 +20,7 @@ userRouter.post(
   })
 );
 
+userRouter.post("/user/:userId/membership", controller.setMembership);
+userRouter.post("/user/:userId/admin", controller.setAdmin);
+
 export default userRouter;

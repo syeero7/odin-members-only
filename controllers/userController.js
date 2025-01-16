@@ -35,3 +35,30 @@ export const logoutUserGet = (req, res, next) => {
     res.redirect("/");
   });
 };
+
+export const setMembership = async (req, res) => {
+  const { userId } = req.params;
+  const { passcode } = req.body;
+
+  if (passcode !== process.env.MEMBER_PASSCODE) return res.redirect(401, "/");
+
+  await db.insertMember(userId);
+  return res.redirect("/");
+};
+
+export const setAdmin = async (req, res) => {
+  const { userId } = req.params;
+  const { passcode } = req.body;
+
+  if (passcode !== process.env.ADMIN_PASSCODE) return res.redirect(401, "/");
+
+  const member = await db.getMemberByUserId(userId);
+  if (member) {
+    await db.updateMemberToAdmin(userId);
+    return res.redirect("/");
+  }
+
+  await db.insertMember(userId);
+  await db.updateMemberToAdmin(userId);
+  res.redirect("/");
+};
