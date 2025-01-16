@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create post</title>
+  </head>
+  <body>
+    <h1>Create post</h1>
+
+    <%- include('partials/errors') %>
+    <hr />
+
+    <form action="/post/<%= currentUser.id %>/create" method="post">
+      <p>
+        <label>
+          <span>Title :</span>
+          <input type="text" name="title" required />
+        </label>
+      </p>
+      <p>
+        <label>
+          <span>Message :</span>
+          <br />
+          <textarea name="message" required></textarea>
+        </label>
+      </p>
+      <button type="submit">Create</button>
+    </form>
+  </body>
+</html>
