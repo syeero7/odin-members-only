@@ -26,3 +26,14 @@ export const getMemberByUserId = async (id) => {
   );
   return rows[0];
 };
+
+export const insertMember = async (userId) => {
+  await pool.query("INSERT INTO MEMBERS (user_id) VALUES ($1)", [userId]);
+};
+
+export const updateMemberToAdmin = async (userId) => {
+  await pool.query("UPDATE members SET admin = $1 WHERE user_id = $2", [
+    true,
+    userId,
+  ]);
+};
