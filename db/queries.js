@@ -37,3 +37,19 @@ export const updateMemberToAdmin = async (userId) => {
     userId,
   ]);
 };
+
+export const insertPost = async (userId, title, message) => {
+  await pool.query(
+    "INSERT INTO posts (user_id, title, message) VALUES ($1, $2, $3)",
+    [userId, title, message]
+  );
+};
+
+export const getAllPosts = async () => {
+  const { rows } = await pool.query("SELECT * FROM posts");
+  return rows;
+};
+
+export const deletePost = async (postId) => {
+  await pool.query("DELETE FROM posts WHERE id = $1", [postId]);
+};
