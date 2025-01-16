@@ -9,7 +9,7 @@ const lengthErr = (max, min = 1) => {
   return `must be between ${min} and ${max} characters`;
 };
 
-export const validateSignupUser = [
+export const validateUser = [
   body("firstName")
     .trim()
     .isAlpha()

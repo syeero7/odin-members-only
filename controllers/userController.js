@@ -2,12 +2,12 @@ import { validationResult } from "express-validator";
 import bcrypt from "bcryptjs";
 
 import * as db from "../db/queries.js";
-import { validateSignupUser } from "../utils/validation.js";
+import { validateUser } from "../utils/validation.js";
 
 export const signupUserGet = (req, res) => res.render("sign-up");
 
 export const signupUserPost = [
-  validateSignupUser,
+  validateUser,
   async (req, res) => {
     const errors = validationResult(req);
 
