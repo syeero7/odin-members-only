@@ -10,7 +10,8 @@ export const createPost = [
   async (req, res) => {
     const errors = validationResult(req);
 
-    if (!errors.isEmpty()) res.render("createPost", { errors: errors.array() });
+    if (!errors.isEmpty())
+      return res.render("createPost", { errors: errors.array() });
 
     const { id } = req.user;
     const { title, message } = req.body;
