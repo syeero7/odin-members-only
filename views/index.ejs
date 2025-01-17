@@ -23,6 +23,8 @@
       <button type="submit">Logout</button>
     </form>
 
+    <br />
+
     <% if (!currentUser.isMember) { %>
     <form action="user/<%= currentUser.id %>/membership" method="post">
       <input
