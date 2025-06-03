@@ -1,24 +1,32 @@
 {
-  "name": "members-only",
+  "name": "odin-members-only",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "",
+  "main": "app.js",
   "type": "module",
   "scripts": {
-    "dev": "node --env-file=.env --watch app.js"
+    "dev": "node --env-file=.env --watch app.js",
+    "build": "npm install && node db/seed.js",
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
-    "bcryptjs": "^2.4.3",
+    "bcryptjs": "^3.0.2",
     "connect-pg-simple": "^10.0.0",
     "ejs": "^3.1.10",
-    "express": "^4.21.2",
+    "express": "^5.1.0",
+    "express-async-handler": "^1.2.0",
     "express-session": "^1.18.1",
     "express-validator": "^7.2.1",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
-    "pg": "^8.13.1"
+    "pg": "^8.16.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.28.0",
+    "eslint": "^9.28.0",
+    "globals": "^16.2.0"
   }
 }
