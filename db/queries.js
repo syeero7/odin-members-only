@@ -1,14 +1,14 @@
 import pool from "./pool.js";
 
 export async function getUserByEmail(email) {
-  const query = `SELECT first_name AS "firstName", last_name AS "lastName", email, password, role FROM users WHERE email = $1`;
+  const query = `SELECT id, first_name AS "firstName", last_name AS "lastName", email, password, role FROM users WHERE email = $1`;
 
   const { rows } = await pool.query(query, [email]);
   return rows[0];
 }
 
 export async function getUserById(id) {
-  const query = `SELECT first_name AS "firstName", last_name AS "lastName", email, password, role FROM users WHERE id = $1`;
+  const query = `SELECT id, first_name AS "firstName", last_name AS "lastName", email, password, role FROM users WHERE id = $1`;
 
   const { rows } = await pool.query(query, [id]);
   return rows[0];

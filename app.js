@@ -23,7 +23,7 @@ passport.use(
     { usernameField: "email" },
     async (email, password, done) => {
       try {
-        const user = getUserByEmail(email);
+        const user = await getUserByEmail(email);
         if (!user) return done(null, false, { message: "User not found" });
 
         const match = await bcrypt.compare(password, user.password);
@@ -39,7 +39,7 @@ passport.use(
 passport.serializeUser((user, done) => done(null, user.id));
 passport.deserializeUser(async (userId, done) => {
   try {
-    const user = getUserById(userId);
+    const user = await getUserById(userId);
     done(null, user);
   } catch (error) {
     done(error);
@@ -61,7 +61,7 @@ app.use(
 app.use(passport.session());
 
 app.use(async (req, res, next) => {
-  if (req.isAuthenticated()) req.locals.currentUser = req.user;
+  if (req.isAuthenticated()) res.locals.currentUser = req.user;
   next();
 });
 
@@ -70,6 +70,7 @@ app.use("/auth", auth);
 app.use("/posts", posts);
 
 app.use((error, req, res, next) => {
+  console.error(error);
   res.status(500).send(error.message || "Server Error");
 });
 

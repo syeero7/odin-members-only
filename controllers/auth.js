@@ -53,7 +53,7 @@ export const signUpPOST = [
 ];
 
 export const signInGET = (req, res) => {
-  const error = req.session.messages.length
+  const error = req.session.messages?.length
     ? "Incorrect email or password"
     : "";
 
@@ -95,7 +95,7 @@ export const updateUserRole = [
     if (!result.isEmpty()) return res.redirect(400, "/posts");
 
     const userId = req.user.id;
-    const { role } = req.body;
+    const { role } = req.params;
 
     await db.updateUserRole(userId, role);
     res.redirect("/posts");
