@@ -9,6 +9,7 @@ import connectPg from "connect-pg-simple";
 import pool from "./db/pool.js";
 import { getUserByEmail, getUserById } from "./db/queries.js";
 import auth from "./routes/auth.js";
+import posts from "./routes/posts.js";
 
 const app = express();
 
@@ -64,7 +65,9 @@ app.use(async (req, res, next) => {
   next();
 });
 
-app.use("auth", auth);
+app.get("/", (req, res) => res.redirect("/posts"));
+app.use("/auth", auth);
+app.use("/posts", posts);
 
 app.use((error, req, res, next) => {
   res.status(500).send(error.message || "Server Error");

@@ -25,3 +25,26 @@ export async function updateUserRole(userId, role) {
 
   await pool.query(query, [userId, role]);
 }
+
+export async function getAllPosts() {
+  const query = `SELECT p.id, p.title, p.content, p.created_at AS "createdAt",
+    json_build_object('firstName', u.first_name, 'lastName', u.last_name)
+    AS creator FROM posts p JOIN users u ON p.creator_id = u.id
+    ORDER BY p.created_at DESC`;
+
+  const { rows } = await pool.query(query);
+  return rows;
+}
+
+export async function insertPost(creatorId, title, content) {
+  const query = `INSERT INTO posts (creator_id, title, content)
+    VALUES ($1, $2, $3)`;
+
+  await pool.query(query, [creatorId, title, content]);
+}
+
+export async function deletePost(postId) {
+  const query = `DELETE FROM posts WHERE id = $1`;
+
+  await pool.query(query, [postId]);
+}
