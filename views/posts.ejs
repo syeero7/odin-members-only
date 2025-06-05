@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Posts</title>
+  </head>
+  <body>
+    <%- include("navbar") %>
+
+    <header class="main-header">
+      <% if (locals.currentUser) { %>
+      <h1>Welcome <%= currentUser.firstName %> <%= currentUser.lastName %></h1>
+
+      <% if (currentUser.role === "user") { %>
+
+      <strong> Join the club </strong>
+
+      <form action="/auth/roles/member" method="post">
+        <label>
+          <span>Passcode </span>
+          <input type="password" name="passcode" required />
+        </label>
+
+        <button>Submit</button>
+      </form>
+      <% } %> <% if (currentUser.role === "member") { %>
+
+      <strong> Become an admin </strong>
+
+      <form action="/auth/roles/admin" method="post">
+        <label>
+          <span>Passcode </span>
+          <input type="password" name="passcode" required />
+        </label>
+
+        <button>Submit</button>
+      </form>
+
+      <% } %>
+      <a href="/posts/new" class="new-post"> Create new message </a>
+
+      <% } else { %>
+      <h1>Welcome Guest</h1>
+      <% } %>
+    </header>
+
+    <main class="posts">
+      <% posts.forEach(post => { %>
+
+      <article class="post">
+        <div>
+          <h2><%= post.title %></h2>
+
+          <% if (locals.currentUser && currentUser.role === "admin") { %>
+          <form action="/posts/<%= post.id %>/delete" method="post">
+            <button aria-label="delete">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
+                <path
+                  d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z"
+                />
+              </svg>
+            </button>
+          </form>
+          <% } %>
+        </div>
+
+        <% if (locals.currentUser && currentUser.role !== "user") { %>
+        <h3><%= post.creator.firstName %> <%= post.creator.lastName %></h3>
+        <p><%=new Date(post.createdAt).toISOString().split("T")[0] %></p>
+        <% } else { %>
+        <h3>*************************</h3>
+        <p>**** ** **</p>
+        <% } %>
+
+        <p><%= post.content %></p>
+      </article>
+      <% }) %>
+    </main>
+  </body>
+</html>
