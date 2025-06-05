@@ -1,0 +1,23 @@
+<nav>
+  <ul>
+    <li>
+      <a href="/posts"> Posts </a>
+    </li>
+
+    <% if (locals.currentUser) { %>
+    <li>
+      <form action="/auth/sign-out" method="post">
+        <button>Signout</button>
+      </form>
+    </li>
+    <% } else { %>
+    <li>
+      <a href="/auth/sign-in">Sign in</a>
+    </li>
+
+    <li>
+      <a href="/auth/sign-up">Sign up</a>
+    </li>
+    <% } %>
+  </ul>
+</nav>

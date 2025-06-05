@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Sign up</title>
+  </head>
+  <body>
+    <%- include("navbar") %>
+
+    <header class="form-header">
+      <h1>Create an account</h1>
+    </header>
+
+    <form method="post" class="form">
+      <div class="form-field">
+        <label>
+          <span>First name </span>
+          <input type="text" name="firstName" required />
+        </label>
+        <span class="error">
+          <%= locals.errors && errors.firstName ? `* ${errors.firstName}` : ""%>
+        </span>
+      </div>
+
+      <div class="form-field">
+        <label>
+          <span>Last name </span>
+          <input type="text" name="lastName" required />
+        </label>
+        <span class="error">
+          <%= locals.errors && errors.lastName ? `* ${errors.lastName}` : "" %>
+        </span>
+      </div>
+
+      <div class="form-field">
+        <label>
+          <span>Email </span>
+          <input type="email" name="email" required />
+        </label>
+        <span class="error">
+          <%= locals.errors && errors.email ? `* ${errors.email}` : "" %>
+        </span>
+      </div>
+
+      <div class="form-field">
+        <label>
+          <span>Password </span>
+          <input type="password" name="password" required />
+        </label>
+        <span class="error">
+          <%= locals.errors && errors.password ? `* ${errors.password}` : "" %>
+        </span>
+      </div>
+
+      <div class="form-field">
+        <label>
+          <span>Confirm Password </span>
+          <input type="password" name="confirmPassword" required />
+        </label>
+        <span class="error">
+          <%= locals.errors && errors.confirmPassword ? `*
+          ${errors.confirmPassword}` : "" %>
+        </span>
+      </div>
+
+      <button>Sign up</button>
+    </form>
+  </body>
+</html>
