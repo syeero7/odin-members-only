@@ -1,0 +1,237 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --text: hsl(36, 20%, 5%);
+  --background: hsl(40, 43%, 99%);
+  --primary: hsl(41, 58%, 55%);
+  --secondary: hsl(41, 77%, 75%);
+  --accent: hsl(41, 96%, 61%);
+
+  --ff-sans-serif: system-ui, sans-serif;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  font-family: var(--ff-sans-serif);
+  background-color: var(--background);
+  color: var(--text);
+}
+
+li {
+  list-style: none;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+:any-link {
+  color: var(--text);
+  text-decoration: none;
+}
+
+nav {
+  background-color: hsla(from var(--background) h s 96% / 0.75);
+  padding: 1em 0.5em;
+  box-shadow: 0 1px 2px hsla(from var(--text) h s l / 0.2);
+  margin-bottom: 1.5em;
+
+  ul {
+    display: flex;
+    justify-content: end;
+    font-size: 1.2em;
+    max-width: 1200px;
+    gap: 0.75em;
+    margin-inline: auto;
+
+    li:first-child {
+      margin-right: auto;
+    }
+  }
+
+  button {
+    background-color: transparent;
+    border: none;
+  }
+
+  a,
+  button {
+    opacity: 1;
+    transition: opacity 0.25s;
+
+    &:hover,
+    &:focus-visible,
+    &:active {
+      opacity: 0.6;
+    }
+  }
+}
+
+label > span {
+  font-size: 0.9em;
+  opacity: 0.9;
+}
+
+header,
+.posts {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding: 0.25em;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2.3em;
+  text-wrap: balance;
+}
+
+.main-header {
+  display: grid;
+  margin-bottom: 1.5em;
+  gap: 1em;
+
+  strong {
+    font-size: 1.5em;
+  }
+
+  form {
+    display: flex;
+    align-items: center;
+    max-width: fit-content;
+    gap: 0.5em;
+
+    label {
+      display: grid;
+    }
+
+    input {
+      padding: 0.25em;
+      min-width: 220px;
+    }
+
+    button {
+      align-self: flex-end;
+    }
+  }
+}
+
+.form button,
+.main-header form > button,
+.new-post {
+  padding: 0.25em 0.8em;
+  border: 2px solid hsla(from var(--text) h s l / 0.1);
+  border-radius: 6px;
+  max-width: fit-content;
+  background-color: var(--secondary);
+  transition-property: border-color filter;
+  transition-duration: 0.25s;
+
+  &:hover,
+  &:focus-visible,
+  &:active {
+    border-color: var(--accent);
+    filter: drop-shadow(0 0 0.25em var(--accent));
+  }
+}
+
+.posts {
+  --min-col-size: 300px;
+
+  display: grid;
+  gap: 1em;
+  padding-block: 1em 2em;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(min(var(--min-col-size), 100%), 1fr)
+  );
+
+  article {
+    display: grid;
+    min-width: 300px;
+    max-width: 350px;
+    padding: 0.5em;
+    margin-inline: 0.25em;
+    border-radius: 6px;
+    gap: 0.3em;
+
+    --box-shadow: hsla(from var(--text) h s l / 0.1);
+    box-shadow: 3px 3px 5px var(--box-shadow), -1px 0 2px var(--box-shadow),
+      0 -1px 2px var(--box-shadow);
+
+    p:last-child {
+      margin-top: 0.6em;
+    }
+
+    p:first-of-type {
+      font-size: 0.8em;
+    }
+
+    div {
+      display: flex;
+      justify-content: space-between;
+
+      button {
+        width: 24px;
+        height: 24px;
+        background-color: transparent;
+        border: none;
+
+        &:hover,
+        &:active,
+        &:focus-visible {
+          svg {
+            fill: hsl(2, 75%, 60%);
+          }
+        }
+      }
+    }
+  }
+}
+
+.form {
+  margin-top: 1em;
+  max-width: 400px;
+  margin-inline: auto;
+  padding: 0.25em;
+  display: grid;
+  gap: 0.5em;
+
+  button {
+    margin-left: auto;
+  }
+}
+
+.form-field {
+  display: grid;
+
+  label {
+    display: grid;
+  }
+
+  textarea,
+  input {
+    padding: 0.25em;
+  }
+}
+
+textarea {
+  resize: none;
+  min-height: 60px;
+}
+
+.error {
+  height: 0.75em;
+  font-size: 0.75em;
+  color: hsl(2, 75%, 60%);
+}
